@@ -68,6 +68,11 @@ Configure the frontend Firebase Web SDK:
    VITE_FIREBASE_STORAGE_BUCKET=...
    ```
 
+The frontend Firebase wrapper is committed at
+`frontend/src/lib/firebase.js`. Do not create this file from secrets and do not
+ignore `frontend/src/lib/`; a fresh repo created from this template must include
+that source file.
+
 Configure the backend Firebase Admin SDK:
 
 1. In the Firebase Console, open **Project settings**.
@@ -98,6 +103,27 @@ of truth for ports, Firebase, Redis, Postgres, chat retention, and backend
 session settings.
 
 Secret files under `secrets/` are intentionally ignored by git.
+
+## Template Checklist
+
+When creating a new repo from this template, verify these files exist before
+running Vite:
+
+```text
+frontend/src/lib/firebase.js
+frontend/src/app/App.jsx
+.env.example
+```
+
+If Vite reports:
+
+```text
+Failed to resolve import "../lib/firebase.js" from "src/app/App.jsx"
+```
+
+then `frontend/src/lib/firebase.js` was not copied or was ignored by git. Restore
+it from this template and check that `.gitignore` does not contain a broad
+`lib/` rule that also matches `frontend/src/lib/`.
 
 ## Validation
 
