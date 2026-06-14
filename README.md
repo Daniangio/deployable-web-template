@@ -40,61 +40,10 @@ inside your game-specific layer.
 
 5. Open:
 
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:8000
-   - Backend docs: http://localhost:8000/docs
-   - Adminer: http://localhost:8081
-
-## Firebase Setup
-
-Create or select a Firebase project, then enable email/password sign-in:
-
-1. In the Firebase Console, open **Authentication**.
-2. Go to **Sign-in method**.
-3. Enable **Email/Password**.
-
-Configure the frontend Firebase Web SDK:
-
-1. In the Firebase Console, open **Project settings**.
-2. Under **Your apps**, create or select a Web app.
-3. Copy the Firebase config values into `.env`:
-
-   ```text
-   VITE_FIREBASE_API_KEY=...
-   VITE_FIREBASE_AUTH_DOMAIN=...
-   VITE_FIREBASE_PROJECT_ID=...
-   VITE_FIREBASE_APP_ID=...
-   VITE_FIREBASE_MESSAGING_SENDER_ID=...
-   VITE_FIREBASE_STORAGE_BUCKET=...
-   ```
-
-The frontend Firebase wrapper is committed at
-`frontend/src/lib/firebase.js`. Do not create this file from secrets and do not
-ignore `frontend/src/lib/`; a fresh repo created from this template must include
-that source file.
-
-Configure the backend Firebase Admin SDK:
-
-1. In the Firebase Console, open **Project settings**.
-2. Go to **Service accounts**.
-3. Generate a new private key JSON file.
-4. Save it under `secrets/`, for example:
-
-   ```text
-   secrets/firebase-admin.dev.json
-   ```
-
-5. Point `.env` at that file and project:
-
-   ```text
-   FIREBASE_ADMIN_CREDENTIALS=secrets/firebase-admin.dev.json
-   FIREBASE_PROJECT_ID=your-firebase-project-id
-   FIREBASE_PRIMARY_ADMIN_EMAIL=admin@example.com
-   ```
-
-`FIREBASE_PRIMARY_ADMIN_EMAIL` is optional, but useful for local development:
-when that Firebase user first signs in, the backend promotes the account to
-admin automatically.
+   - Frontend: `http://localhost:${FRONTEND_PORT}` from `.env`
+   - Backend API: `http://localhost:${BACKEND_PORT}` from `.env`
+   - Backend docs: `http://localhost:${BACKEND_PORT}/docs` from `.env`
+   - Adminer: `http://localhost:${ADMINER_PORT}` from `.env`
 
 ## Configuration
 
@@ -103,27 +52,6 @@ of truth for ports, Firebase, Redis, Postgres, chat retention, and backend
 session settings.
 
 Secret files under `secrets/` are intentionally ignored by git.
-
-## Template Checklist
-
-When creating a new repo from this template, verify these files exist before
-running Vite:
-
-```text
-frontend/src/lib/firebase.js
-frontend/src/app/App.jsx
-.env.example
-```
-
-If Vite reports:
-
-```text
-Failed to resolve import "../lib/firebase.js" from "src/app/App.jsx"
-```
-
-then `frontend/src/lib/firebase.js` was not copied or was ignored by git. Restore
-it from this template and check that `.gitignore` does not contain a broad
-`lib/` rule that also matches `frontend/src/lib/`.
 
 ## Validation
 
