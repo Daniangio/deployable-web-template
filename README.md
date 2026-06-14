@@ -45,6 +45,52 @@ inside your game-specific layer.
    - Backend docs: http://localhost:8000/docs
    - Adminer: http://localhost:8081
 
+## Firebase Setup
+
+Create or select a Firebase project, then enable email/password sign-in:
+
+1. In the Firebase Console, open **Authentication**.
+2. Go to **Sign-in method**.
+3. Enable **Email/Password**.
+
+Configure the frontend Firebase Web SDK:
+
+1. In the Firebase Console, open **Project settings**.
+2. Under **Your apps**, create or select a Web app.
+3. Copy the Firebase config values into `.env`:
+
+   ```text
+   VITE_FIREBASE_API_KEY=...
+   VITE_FIREBASE_AUTH_DOMAIN=...
+   VITE_FIREBASE_PROJECT_ID=...
+   VITE_FIREBASE_APP_ID=...
+   VITE_FIREBASE_MESSAGING_SENDER_ID=...
+   VITE_FIREBASE_STORAGE_BUCKET=...
+   ```
+
+Configure the backend Firebase Admin SDK:
+
+1. In the Firebase Console, open **Project settings**.
+2. Go to **Service accounts**.
+3. Generate a new private key JSON file.
+4. Save it under `secrets/`, for example:
+
+   ```text
+   secrets/firebase-admin.dev.json
+   ```
+
+5. Point `.env` at that file and project:
+
+   ```text
+   FIREBASE_ADMIN_CREDENTIALS=secrets/firebase-admin.dev.json
+   FIREBASE_PROJECT_ID=your-firebase-project-id
+   FIREBASE_PRIMARY_ADMIN_EMAIL=admin@example.com
+   ```
+
+`FIREBASE_PRIMARY_ADMIN_EMAIL` is optional, but useful for local development:
+when that Firebase user first signs in, the backend promotes the account to
+admin automatically.
+
 ## Configuration
 
 All local runtime configuration is in `.env`. Use `.env.example` as the source
